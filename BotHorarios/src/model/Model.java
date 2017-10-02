@@ -84,7 +84,7 @@ public class Model implements Subject{
 				mensagem = mensagem + "\n <b>" + h_ads_manha[n] + "</b>: " + m.getMateria(mat);
 				n++;
 			}
-		}/*else if(this.diaDaSemana()=="Terça-feira"){
+		}else if(this.diaDaSemana()=="Terça-feira"){
 			mensagem = this.diaDaSemana();
 			for(Object dia:json.getJSONArray(p.get(0).toString()).getJSONObject(Integer.parseInt(p.get(1))).getJSONArray("ter")){
 				mensagem = mensagem + "\n" + dia;
@@ -108,7 +108,7 @@ public class Model implements Subject{
 			mensagem = "Aula sábado?\n<b>Não tem!!!</b>";
 		}else if(this.diaDaSemana()=="Domingo"){
 			mensagem = "Aula domingo?\n<b>Não tem!!!</b>";
-		}*/
+		}
 		
 		if(mensagem != null){
 			this.notificaObservers((Long.parseLong(p.get(2).toString())), mensagem);
