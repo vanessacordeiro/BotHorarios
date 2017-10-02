@@ -18,7 +18,7 @@ public class ControllerSearchADS implements ControllerSearch{
 	}
 	
 	public void pesquisa(List<String> p) throws JSONException, IOException{
-		mo.pesquisaDia(p);
 		vw.avisoEnviando(p);
+		mo.pesquisaDia(p);
 	}
 }
