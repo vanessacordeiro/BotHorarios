@@ -3,4 +3,4 @@
 *.~ml
 *.txt
 PDFs
-amd_manhaJSON.json
+*.json
