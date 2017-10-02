@@ -77,8 +77,8 @@ public class Model implements Subject{
 		int n = 0;
 		
 		String mensagem = null;
-		if("Segunda-feira"=="Segunda-feira"){
-		//if(this.diaDaSemana()=="Segunda-feira"){
+		//if("Segunda-feira"=="Segunda-feira"){
+		if(this.diaDaSemana()=="Segunda-feira"){
 			mensagem = "<b>" + this.diaDaSemana() + " </b>";
 			for(Object mat:json.getJSONArray(p.get(0).toString()).getJSONObject(Integer.parseInt(p.get(1))).getJSONArray("seg")){
 				mensagem = mensagem + "\n <b>" + h_ads_manha[n] + "</b>: " + m.getMateria(mat);
