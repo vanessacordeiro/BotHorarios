@@ -19,7 +19,8 @@ import com.pengrad.telegrambot.response.GetUpdatesResponse;
 import com.pengrad.telegrambot.response.SendResponse;
 
 import controller.ControllerSearch;
-import controller.ControllerSearchADS;
+import controller.ControllerSearchAula;
+import controller.ControllerSearchProva;
 import model.Model;
 
 public class View implements Observer{
@@ -128,14 +129,14 @@ public class View implements Observer{
 				}else if(update.message().text().toLowerCase().replace(" ", "").equals("horariodeaula")|| 
 						update.message().text().toLowerCase().replace(" ", "").equals("horáriodeaula")){
 					this.p.add("ADS_manha");
-					setControllerSearch(new ControllerSearchADS(this.model, this));
+					setControllerSearch(new ControllerSearchAula(this.model, this));
 					sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"Qual semestre você está em ADS?"));
 					this.comportamento = true;
 				}else if(update.message().text().toLowerCase().replace(" ", "").equals("horariodasemana")|| 
 					update.message().text().toLowerCase().replace(" ", "").equals("horáriodasemana")){
 					System.out.print("foi");
 					this.p.add("semanadeprovas");
-					setControllerSearch(new ControllerSearchADS(this.model, this));
+					setControllerSearch(new ControllerSearchProva(this.model, this));
 					sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"Qual semestre você está em ADS?"));
 					this.comportamento = true;	
 				}else{
@@ -156,11 +157,7 @@ public class View implements Observer{
 	}
 	
 	public void falandoComController(List<String> p) throws JSONException, IOException{
-		if(p.get(0).equals("ADS_manha")){
-			this.controller.pesquisaAula(p);
-		}else{
-			this.controller.pesquisaProva(p);
-		}
+			this.controller.pesquisa(p);
 		
 	}
 	
