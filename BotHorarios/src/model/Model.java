@@ -47,11 +47,21 @@ public class Model implements Subject{
 	    }
 	}
 	
-	public JSONObject getJSON(Object curso) throws JSONException, IOException{
+	public JSONObject getJSONAula(Object curso) throws JSONException, IOException{
 		if(curso.equals("ADS_manha"))
 			lendo("https://api.myjson.com/bins/1g1pd5");
 		return json;
 	}
+	
+	public JSONObject getJSONProva(Object curso) throws JSONException, IOException{
+		if(curso.equals("semanadeprovas"))
+			lendo("https://api.myjson.com/bins/rqsgj");
+		return json;
+	}
+//	public JSONObject getJSONProva() throws JSONException, IOException{
+//			lendo("https://api.myjson.com/bins/rqsgj");
+//		return json;
+//	}
 	
 	public String diaDaSemana(){
 		Date d = new Date();
@@ -72,7 +82,7 @@ public class Model implements Subject{
 	}
 	
 	public void pesquisaDia(List<String> p)  throws JSONException, IOException{
-		JSONObject json = this.getJSON(p.get(0));
+		JSONObject json = this.getJSONAula(p.get(0));
 		m.construindoMapa();
 		int n = 0;
 		
@@ -116,5 +126,40 @@ public class Model implements Subject{
 		/*else {
 			this.notificaObservers((Long.parseLong(p.get(2).toString())), "Not found");
 		}*/
+	}
+	
+	
+	public void pesquisaSemana(List<String> p)  throws JSONException, IOException{
+		JSONObject json = this.getJSONProva(p.get(0));
+		int n = 0, x = 0;
+		String mensagem = "<b>Horário da Semana de Provas</b>";
+		m.construindoMapa();
+		
+		String[] diasSemana = {"Segunda-feira - 04/12", "Terça-feira -  05/12", "Quarta-feira - 29/11", "Quinta-feira - 30/11", "Sexta-feira - 01/12"};
+		String[] diasSemana2 =  {"seg", "ter", "qua", "qui", "sex"};
+		
+		for(x=0; x<5; x++){
+			mensagem = mensagem + "\n\n" + "<b>"+ diasSemana[x] + "</b>";
+			for(Object mat:json.getJSONArray(p.get(0).toString()).getJSONObject(Integer.parseInt(p.get(1))).getJSONArray(diasSemana2[x])){
+				String str;
+				if(mat.equals("")){
+					str = "Sem provas";
+				}else{
+					str = m.getMateria(mat);
+				}
+				if(str.equals("null")){
+					str = "Sem provas";
+				}
+				
+				mensagem = mensagem + "\n <b>" + h_ads_manha[n] + "</b>: " + str;
+				n++;
+			}
+			n = 0;
+		}
+		
+		
+		if(mensagem != null){
+			this.notificaObservers((Long.parseLong(p.get(2).toString())), mensagem);
+		} 
 	}
 }

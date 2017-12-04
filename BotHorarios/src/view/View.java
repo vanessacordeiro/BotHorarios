@@ -125,17 +125,24 @@ public class View implements Observer{
 								+ "<b>Ex.:</b> '1 a' ou '1º a' ou 'primeiro a'\n\n"
 								+ "Digite novamente!").parseMode(ParseMode.HTML));
 					}
-				}else if(update.message().text().toLowerCase().replace(" ", "").equals("ads")|| 
-						update.message().text().toLowerCase().replace(" ", "").equals("analiseedesenvolvimentodesistemas")){
+				}else if(update.message().text().toLowerCase().replace(" ", "").equals("horariodeaula")|| 
+						update.message().text().toLowerCase().replace(" ", "").equals("horáriodeaula")){
 					this.p.add("ADS_manha");
 					setControllerSearch(new ControllerSearchADS(this.model, this));
 					sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"Qual semestre você está em ADS?"));
 					this.comportamento = true;
+				}else if(update.message().text().toLowerCase().replace(" ", "").equals("horariodasemana")|| 
+					update.message().text().toLowerCase().replace(" ", "").equals("horáriodasemana")){
+					System.out.print("foi");
+					this.p.add("semanadeprovas");
+					setControllerSearch(new ControllerSearchADS(this.model, this));
+					sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"Qual semestre você está em ADS?"));
+					this.comportamento = true;	
 				}else{
 					if(this.first==true){
 						sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"<b>Bem-vindo aluno de ADS!</b>\n"
 								+ "Posso informar o seu horário do dia!\n"
-								+ "Quer saber o horário de aula ou horário de semana de prova?").parseMode(ParseMode.HTML));
+								+ "Quer saber o horário de aula ou horário da semana de provas?").parseMode(ParseMode.HTML));
 						System.out.println("Mensagem Enviada?" +sendResponse.isOk());
 						this.first = false;
 					}else{
@@ -149,7 +156,12 @@ public class View implements Observer{
 	}
 	
 	public void falandoComController(List<String> p) throws JSONException, IOException{
-		this.controller.pesquisa(p);
+		if(p.get(0).equals("ADS_manha")){
+			this.controller.pesquisaAula(p);
+		}else{
+			this.controller.pesquisaProva(p);
+		}
+		
 	}
 	
 	public void update(long chatId, String horarios){
