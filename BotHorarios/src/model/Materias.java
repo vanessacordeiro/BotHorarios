@@ -44,7 +44,7 @@ public class Materias {
 		materias.put("ingV", new String("Inglês V"));
 		materias.put("tgI", new String("Trabalho de Graduação I"));
 		materias.put("sgi", new String("Segurança da Informação"));
-		materias.put("ia", new String("Inteligência Artificia"));
+		materias.put("ia", new String("Inteligência Artificial"));
 		materias.put("tei", new String("Tópicos Especiais em Informática"));
 		materias.put("tgII", new String("Trabalho de Graduação II"));
 		materias.put("ggti", new String("Gestão e Governança de Tec. da Informação"));

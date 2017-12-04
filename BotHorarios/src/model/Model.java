@@ -39,8 +39,8 @@ public class Model implements Subject{
 		    StringBuilder sb = new StringBuilder();
 		    int cp;
 		    while ((cp = rd.read()) != -1) {
-		    sb.append((char) cp);
-	    }
+		    	sb.append((char) cp);
+		    }
 		    this.json = new JSONObject(sb.toString());
 	    }finally{
 	    	is.close();

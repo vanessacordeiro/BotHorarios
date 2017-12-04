@@ -133,13 +133,13 @@ public class View implements Observer{
 					this.comportamento = true;
 				}else{
 					if(this.first==true){
-						sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"<b>Bem-vindo!</b>\n"
+						sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"<b>Bem-vindo aluno de ADS!</b>\n"
 								+ "Posso informar o seu horário do dia!\n"
-								+ "Qual seu curso?").parseMode(ParseMode.HTML));
+								+ "Quer saber o horário de aula ou horário de semana de prova?").parseMode(ParseMode.HTML));
 						System.out.println("Mensagem Enviada?" +sendResponse.isOk());
 						this.first = false;
 					}else{
-						sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"Não entendi o curso...\nDigite novamente, por favor!"));
+						sendResponse = bot.execute(new SendMessage(update.message().chat().id(),"Não entendi...\nDigite novamente, por favor!"));
 					}
 				}
 					
